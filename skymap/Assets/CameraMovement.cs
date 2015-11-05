@@ -3,54 +3,28 @@ using System.Collections;
 
 public class CameraMovement : MonoBehaviour
 {
-   
-     public Transform target;
-     public float distance = 20.0f;
-     public float zoomSpd = 2.0f;
- 
-     public float xSpeed = 240.0f;
-     public float ySpeed = 123.0f;
- 
-     public int yMinLimit = -723;
-     public int yMaxLimit = 877;
- 
-     private float x = 22.0f;
-     private float y = 33.0f;
- 
+    public GameObject rightHand;
+    public GameObject leftHand;
      public void Start () {
-        
-         x = 22f;
-         y = 33f;
- 
-         // Make the rigid body not change rotation
-         if (GetComponent<Rigidbody>())
-             GetComponent<Rigidbody>().freezeRotation = true;
      }
- 
-     public void LateUpdate () {
-         if (target) {
-             x -= Input.GetAxis("Horizontal") * xSpeed * 0.02f;
-             y += Input.GetAxis("Vertical") * ySpeed * 0.02f;
-             
-             y = ClampAngle(y, yMinLimit, yMaxLimit);
-             
-         distance -= Input.GetAxis("Fire1") *zoomSpd* 0.02f;
-             distance += Input.GetAxis("Fire2") *zoomSpd* 0.02f;
-             
-             Quaternion rotation = Quaternion.Euler(y, x, 0.0f);
-             Vector3 position = rotation * new Vector3(0.0f, 0.0f, -distance) + target.position;
-             
-             transform.rotation = rotation;
-             transform.position = position;
+
+     public void Update()
+     {
+         if(rightHand.transform.position.x > .5f)
+         {
+             //Delta time is calculated by Unity. It gives you the inverse
+             //of the framerate. ie 60FPS = Delta time of 1/60. This way you
+             //can multiply it against values to ensure they occur at the same
+             //speed, regardless of update times.
+             transform.Rotate(Vector3.up, 20.0f * Time.deltaTime);
          }
-     }
- 
-     public static float ClampAngle (float angle, float min, float max) {
-         if (angle < -360.0f)
-             angle += 360.0f;
-         if (angle > 360.0f)
-             angle -= 360.0f;
-         return Mathf.Clamp (angle, min, max);
+
+         if(leftHand.transform.position.x < -0.3f)
+         {
+             //transform.Rotate(Vector3.down, 1.0f);
+             transform.Rotate(Vector3.down, 20.0f * Time.deltaTime);
+         }
+
      }
  }
   
