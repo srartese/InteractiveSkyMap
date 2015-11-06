@@ -25,6 +25,11 @@ public class CameraMovement : MonoBehaviour
              transform.Rotate(Vector3.down, 20.0f * Time.deltaTime);
          }
 
+        //if(leftHand.transform.position.y < 1.2f)
+        // {
+        //     transform.Rotate(Vector3.up, 20.0f * Time.deltaTime);
+
+        // }
      }
  }
   
