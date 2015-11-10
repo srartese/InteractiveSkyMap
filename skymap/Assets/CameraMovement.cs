@@ -43,6 +43,12 @@ public class CameraMovement : MonoBehaviour
         //     transform.Rotate(Vector3.up, 20.0f * Time.deltaTime);
 
         // }
+
+
+		//Seclting objects will deal with depth
+		//Adding in a timer for selecting and world rotation
+
+
      }
  }
   
