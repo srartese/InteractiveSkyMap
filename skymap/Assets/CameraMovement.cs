@@ -10,8 +10,21 @@ public class CameraMovement : MonoBehaviour
 
      public void Update()
      {
-         if(rightHand.transform.position.x > .5f)
+		//if motion null for 2 min, rotatate camera
+
+       /*  if(rightHand.transform.position.x > .5f)
          {
+			while (rightHand.transform.position > .5f)
+			{
+
+				for( i = 0; i < 1; i++)
+				{
+					transform.Rotate (Vector3.up, i * Time.deltaTime);
+
+				}
+			}
+		 */
+
              //Delta time is calculated by Unity. It gives you the inverse
              //of the framerate. ie 60FPS = Delta time of 1/60. This way you
              //can multiply it against values to ensure they occur at the same
