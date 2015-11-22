@@ -7,8 +7,12 @@ public class MenuScript : MonoBehaviour {
     public Canvas quitMenu;
     public Button startText;
     public Button exitText;
+    public GameObject rightHand;
+    public GameObject leftHand;
+   
 
 	// Use this for initialization
+   
 	void Start () 
     {
         quitMenu = quitMenu.GetComponent<Canvas>();
@@ -22,6 +26,7 @@ public class MenuScript : MonoBehaviour {
         quitMenu.enabled = true;
         startText.enabled = false;
         exitText.enabled = false;
+
     }
 	
     public void NoPress()
@@ -42,9 +47,20 @@ public class MenuScript : MonoBehaviour {
         Application.Quit();
     }
 
+    public void KinectSelect()
+    {
+        if (rightHand.transform.position.x > .9f)
+        {
+            StartLevel();
+        }
+      
+       
+    }
+  
+
 	// Update is called once per frame
 	void Update () 
     {
-	
-	}
+        KinectSelect();
+    }
 }
