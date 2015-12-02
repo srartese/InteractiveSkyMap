@@ -9,6 +9,7 @@ public class MenuScript : MonoBehaviour {
     public Button exitText;
     public GameObject rightHand;
     public GameObject leftHand;
+	public float alpha;
    
 
 	// Use this for initialization
@@ -19,6 +20,7 @@ public class MenuScript : MonoBehaviour {
         startText = startText.GetComponent<Button>();
         exitText = exitText.GetComponent<Button>();
         quitMenu.enabled = false;
+		alpha = 1f;
 	}
 
     public void ExitPress()
@@ -26,7 +28,7 @@ public class MenuScript : MonoBehaviour {
         quitMenu.enabled = true;
         startText.enabled = false;
         exitText.enabled = false;
-
+		alpha = .18f;
     }
 	
     public void NoPress()
@@ -34,6 +36,7 @@ public class MenuScript : MonoBehaviour {
         quitMenu.enabled = false;
         startText.enabled = true;
         exitText.enabled = true;
+		alpha = 1f;
     }
 
     public void StartLevel()
