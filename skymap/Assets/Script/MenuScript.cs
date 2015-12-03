@@ -9,6 +9,8 @@ public class MenuScript : MonoBehaviour {
     public Button exitText;
     public GameObject rightHand;
     public GameObject leftHand;
+    public GameObject enterObj;
+    float timeLeft = 5.0f;
    
 
 	// Use this for initialization
@@ -46,10 +48,20 @@ public class MenuScript : MonoBehaviour {
         Application.Quit();
     }
 
+    void OnCollisionEnter(Collision col)
+    {
+       
+        if (col.gameObject.name == "enterObj")
+        {
+            Debug.Log("This worked");
+            StartLevel();
+        }
+    }
+
+
     public void KinectSelect()
     {
-        if (rightHand.transform.position.x > .9f)
-        {
+        if (rightHand.transform.position.x > .9f){
             StartLevel();
         }
       
@@ -60,6 +72,7 @@ public class MenuScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        KinectSelect();
+       // KinectSelect();
+         
     }
 }
