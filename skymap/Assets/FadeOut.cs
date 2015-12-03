@@ -7,7 +7,11 @@ public class FadeOut : MonoBehaviour {
 		StartCoroutine (DoFade ());
 	}
 
-		IEnumerator DoFade () {
+	public void FadeAll() {
+		StartCoroutine (AllGone ());
+	}
+
+	IEnumerator DoFade () {
 			CanvasGroup canvasGroup = GetComponents<CanvasGroup>()[0];
 
 			while (canvasGroup.alpha>0.12){
@@ -18,5 +22,18 @@ public class FadeOut : MonoBehaviour {
 
 			canvasGroup.interactable = false;
 			yield return null;
+	}
+
+	IEnumerator AllGone () {
+		CanvasGroup canvasGroup = GetComponents<CanvasGroup>()[0];
+		
+		while (canvasGroup.alpha>0){
+			
+			canvasGroup.alpha -= Time.deltaTime / 2;
+			yield return null;
+		}
+		
+		canvasGroup.interactable = false;
+		yield return null;
 	}
 }
