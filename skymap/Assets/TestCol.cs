@@ -2,16 +2,61 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class TestCol : MonoBehaviour {
+[RequireComponent(typeof(AudioSource))]
+public class TestCol : MonoBehaviour
+{
 
-	void OnCollisionEnter(Collision col)
+    float timeLeft = 4.0f;
+    bool collided = false;
+    string objName = "";
+    public AudioSource source;
+    public AudioClip shootSound;
+    private float vol = 1.0f;
+
+
+    void Start()
+    {
+        source = GetComponent<AudioSource>();
+    }
+
+    void Update()
+    {
+        if (timeLeft > 0 && collided == true)
+        {
+            timeLeft -= Time.deltaTime;
+        }
+        else if (timeLeft <= 0)
+        {
+            Debug.Log("You found " + gameObject.transform.parent.name);
+            source.clip = shootSound;
+            source.Play();
+            collided = false;
+            timeLeft = 4.0f;
+        } else
+        {
+            timeLeft = 4.0f;
+            collided = false;
+        }
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+
+        if (col.gameObject.name == "SphereLEFT" || col.gameObject.name == "SphereRIGHT")
+        {
+            //Debug.Log("Collided " + gameObject.transform.parent.name);
+            collided = true;
+            objName = gameObject.transform.parent.name;
+        }
+    }
+
+    void OnCollisionExit(Collision col)
     {
         if (col.gameObject.name == "SphereLEFT" || col.gameObject.name == "SphereRIGHT")
         {
-            Debug.Log("You found " + gameObject.transform.parent.name);
+            //Debug.Log("Lost " + gameObject.transform.parent.name);
+            timeLeft = 4.0f;
+            collided = false;
         }
-
-
-
     }
 }
