@@ -13,7 +13,7 @@ public class MenuScript : MonoBehaviour {
     public GameObject enterObj;
     float timeLeft = 5.0f;
    
-
+    //Testing
 	// Use this for initialization
    
 	void Start () 
