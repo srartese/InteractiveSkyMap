@@ -19,11 +19,12 @@ public class MenuScript : MonoBehaviour {
 	void Start () 
     {
         quitMenu = quitMenu.GetComponent<Canvas>();
+		creditMenu = creditMenu.GetComponent<Canvas>();
+
         startText = startText.GetComponent<Button>();
         exitText = exitText.GetComponent<Button>();
-        quitMenu.enabled = false;
 
-		creditMenu = creditMenu.GetComponent<Canvas>();
+        quitMenu.enabled = false;
 		creditMenu.enabled = false;
 
 	}
