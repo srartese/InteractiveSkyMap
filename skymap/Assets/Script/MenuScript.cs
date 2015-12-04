@@ -8,12 +8,11 @@ public class MenuScript : MonoBehaviour {
 	public Canvas creditMenu;
     public Button startText;
     public Button exitText;
+    public GameObject colYes;
     public GameObject rightHand;
     public GameObject leftHand;
-    public GameObject enterObj;
     float timeLeft = 5.0f;
    
-    //Testing
 	// Use this for initialization
    
 	void Start () 
@@ -22,6 +21,7 @@ public class MenuScript : MonoBehaviour {
         startText = startText.GetComponent<Button>();
         exitText = exitText.GetComponent<Button>();
         quitMenu.enabled = false;
+       // GameObject.Find("colYes").SetActive(false);
 
 		creditMenu = creditMenu.GetComponent<Canvas>();
 		creditMenu.enabled = false;
@@ -73,14 +73,13 @@ public class MenuScript : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
     {
-       
+
         if (col.gameObject.name == "enterObj")
         {
             Debug.Log("This worked");
             StartLevel();
         }
     }
-
 
     public void KinectSelect()
     {
