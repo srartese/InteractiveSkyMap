@@ -5,14 +5,16 @@ public class CameraMovement : MonoBehaviour
 {
     public GameObject rightHand;
     public GameObject leftHand;
-     public void Start () {
-     }
+
+
+    public void Start () {
+    }
 
      public void Update()
      {
-		//if motion null for 2 min, rotatate camera
+        //if motion null for 2 min, rotatate camera
 
-         if(rightHand.transform.position.x > .5f)
+        if (rightHand.transform.position.x > .5f)
          {
 
              transform.Rotate(Vector3.up, 20.0f * Time.deltaTime);
