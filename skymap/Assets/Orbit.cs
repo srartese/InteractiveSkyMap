@@ -17,8 +17,6 @@ public class Orbit : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        cube = GameObject.FindWithTag("Cube");
-        center = cube.transform;
         transform.position = (transform.position - center.position).normalized * radius + center.position;
         radius = 2.0f;
     }
