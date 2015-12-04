@@ -7,6 +7,7 @@ public class FadeIn : MonoBehaviour {
 		StartCoroutine (DoFade ());
 	}
 	
+
 	IEnumerator DoFade () {
 		CanvasGroup canvasGroup = GetComponents<CanvasGroup>()[0];
 		
@@ -19,4 +20,6 @@ public class FadeIn : MonoBehaviour {
 		canvasGroup.interactable = true;
 		yield return null;
 	}
+
+
 }
