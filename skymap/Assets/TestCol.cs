@@ -6,10 +6,9 @@ public class TestCol : MonoBehaviour {
 
 	void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.name == "HANDLEFT")
+        if (col.gameObject.name == "SphereLEFT" || col.gameObject.name == "SphereRIGHT")
         {
-           // Destroy(col.gameObject);
-            Debug.Log("Good");
+            Debug.Log("You found " + gameObject.transform.parent.name);
         }
 
 
