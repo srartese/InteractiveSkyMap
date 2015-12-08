@@ -13,10 +13,13 @@ public class TestCol : MonoBehaviour
     public AudioClip shootSound;
     private float vol = 1.0f;
 
+    public GameObject infoScreen;
+
 
     void Start()
     {
         source = GetComponent<AudioSource>();
+        infoScreen.SetActive(false);
     }
 
     void Update()
@@ -32,6 +35,7 @@ public class TestCol : MonoBehaviour
             source.Play();
             collided = false;
             timeLeft = 4.0f;
+            infoScreen.SetActive(true);
         } else
         {
             timeLeft = 4.0f;
