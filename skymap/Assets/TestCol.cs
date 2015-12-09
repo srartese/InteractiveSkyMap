@@ -6,7 +6,7 @@ using System.Collections;
 public class TestCol : MonoBehaviour
 {
 
-    float timeLeft = 4.0f;
+    float timeLeft = 3.0f;
     bool collided = false;
     string objName = "";
     public AudioSource source;
@@ -34,11 +34,13 @@ public class TestCol : MonoBehaviour
             source.clip = shootSound;
             source.Play();
             collided = false;
-            timeLeft = 4.0f;
+            timeLeft = 3.0f;
+
+            //Testing UIs
             infoScreen.SetActive(true);
         } else
         {
-            timeLeft = 4.0f;
+            timeLeft = 3.0f;
             collided = false;
         }
     }
@@ -59,7 +61,7 @@ public class TestCol : MonoBehaviour
         if (col.gameObject.name == "SphereLEFT" || col.gameObject.name == "SphereRIGHT")
         {
             //Debug.Log("Lost " + gameObject.transform.parent.name);
-            timeLeft = 4.0f;
+            timeLeft = 3.0f;
             collided = false;
         }
     }
