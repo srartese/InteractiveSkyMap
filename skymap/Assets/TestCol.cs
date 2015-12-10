@@ -38,6 +38,9 @@ public class TestCol : MonoBehaviour
 
             //Testing UIs
             infoScreen.SetActive(true);
+
+            //For enabling boxes
+            //gameObject.SetActive(false);
         } else
         {
             timeLeft = 3.0f;
