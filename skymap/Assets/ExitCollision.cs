@@ -2,19 +2,14 @@
 using UnityEngine.UI;
 using System.Collections;
 
-[RequireComponent(typeof(AudioSource))]
-public class TestCol : MonoBehaviour
-{
+public class ExitCollision : MonoBehaviour {
 
     float timeLeft = 3.0f;
     bool collided = false;
     string objName = "";
-    public AudioSource source;
-    public AudioClip shootSound;
     private float vol = 1.0f;
 
     public GameObject infoScreen;
-    public GameObject selectCube;
 
     public GameObject cameraObject;
     public GameObject kmCameraObject;
@@ -24,16 +19,14 @@ public class TestCol : MonoBehaviour
     private CameraMovement kmCameraScript;
     private Orbit orbitScript;
 
-    void Start()
-    {
-        source = GetComponent<AudioSource>();
+    // Use this for initialization
+    void Start () {
         cameraScript = cameraObject.GetComponent<CameraMovement>();
         kmCameraScript = kmCameraObject.GetComponent<CameraMovement>();
         orbitScript = rotateObject.GetComponent<Orbit>();
-        infoScreen.SetActive(false);
-        selectCube.SetActive(false);
     }
 
+    // Update is called once per frame
     void Update()
     {
         if (timeLeft > 0 && collided == true)
@@ -42,22 +35,21 @@ public class TestCol : MonoBehaviour
         }
         else if (timeLeft <= 0)
         {
-            Debug.Log("You found " + gameObject.transform.parent.name);
-            source.clip = shootSound;
-            //source.Play();
+            //Debug.Log("You found " + gameObject.transform.parent.name);
             collided = false;
             timeLeft = 3.0f;
 
             //Testing UIs
-            infoScreen.SetActive(true);
-            cameraScript.enabled = false;
-            kmCameraScript.enabled = false;
-            orbitScript.enabled = false;
-            selectCube.SetActive(true);
+            infoScreen.SetActive(false);
+            cameraScript.enabled = true;
+            kmCameraScript.enabled = true;
+            orbitScript.enabled = true;
+            gameObject.SetActive(false);
 
             //For enabling boxes
             //gameObject.SetActive(false);
-        } else
+        }
+        else
         {
             timeLeft = 3.0f;
             collided = false;
@@ -66,10 +58,10 @@ public class TestCol : MonoBehaviour
 
     void OnCollisionEnter(Collision col)
     {
-
-        if (col.gameObject.name == "SphereLEFT" || col.gameObject.name == "SphereRIGHT")
+        Debug.Log("Collided " + col.gameObject.name);
+        if (col.gameObject.name == "NewSphereRIGHT")
         {
-            //Debug.Log("Collided " + gameObject.transform.parent.name);
+            Debug.Log("Collided " + col.gameObject.name);
             collided = true;
             objName = gameObject.transform.parent.name;
         }
@@ -77,7 +69,7 @@ public class TestCol : MonoBehaviour
 
     void OnCollisionExit(Collision col)
     {
-        if (col.gameObject.name == "SphereLEFT" || col.gameObject.name == "SphereRIGHT")
+        if (col.gameObject.name == "NewSphereRIGHT")
         {
             //Debug.Log("Lost " + gameObject.transform.parent.name);
             timeLeft = 3.0f;
