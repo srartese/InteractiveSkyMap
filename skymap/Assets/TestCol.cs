@@ -14,11 +14,22 @@ public class TestCol : MonoBehaviour
     private float vol = 1.0f;
 
     public GameObject infoScreen;
+    public GameObject selectCube;
 
+    public GameObject cameraObject;
+    public GameObject kmCameraObject;
+    public GameObject rotateObject;
+
+    private CameraMovement cameraScript;
+    private CameraMovement kmCameraScript;
+    private Orbit orbitScript;
 
     void Start()
     {
         source = GetComponent<AudioSource>();
+        cameraScript = cameraObject.GetComponent<CameraMovement>();
+        kmCameraScript = kmCameraObject.GetComponent<CameraMovement>();
+        orbitScript = rotateObject.GetComponent<Orbit>();
         infoScreen.SetActive(false);
     }
 
@@ -38,6 +49,10 @@ public class TestCol : MonoBehaviour
 
             //Testing UIs
             infoScreen.SetActive(true);
+            cameraScript.enabled = false;
+            kmCameraScript.enabled = false;
+            orbitScript.enabled = false;
+            selectCube.SetActive(false);
 
             //For enabling boxes
             //gameObject.SetActive(false);
