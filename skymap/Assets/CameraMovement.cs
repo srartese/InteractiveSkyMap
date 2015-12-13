@@ -12,11 +12,10 @@ public class CameraMovement : MonoBehaviour
 
      public void Update()
      {
-        //if motion null for 2 min, rotatate camera
-
+        //When the users hands are at these x values
         if (rightHand.transform.position.x > .5f)
          {
-
+             //Move the camera in that direction
              transform.Rotate(Vector3.up, 20.0f * Time.deltaTime);
          }
 

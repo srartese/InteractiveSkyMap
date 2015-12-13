@@ -11,6 +11,7 @@ public class Orbit : MonoBehaviour {
     public float radiusSpeed = 0.5f;
     public float rotationSpeed = 80.0f;
 
+    //For reading our players hands values
     public GameObject rightHand;
     public GameObject leftHand;
 
@@ -24,16 +25,15 @@ public class Orbit : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         
-
+        //Notice these values match the ones in CameraMovement
+        //We are having our reference to the user orbit the camera at the same rate at which it moves
         if (rightHand.transform.position.x > .5f)
         {
-
             transform.RotateAround(center.position, axis, rotationSpeed * Time.deltaTime);
         }
 
         if (leftHand.transform.position.x < -0.3f)
         {
-            //transform.Rotate(Vector3.down, 1.0f);
             transform.RotateAround(center.position, axis, -rotationSpeed * Time.deltaTime);
         }
 
