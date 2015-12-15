@@ -5,7 +5,7 @@ using System.Collections;
 public class ExitCollision : MonoBehaviour {
 
     //Starting values
-    float timeLeft = 3.0f;
+    float timeLeft = 4.0f;
     bool collided = false;
 
     //For the screens that display time to users
@@ -61,7 +61,7 @@ public class ExitCollision : MonoBehaviour {
         {
             //When succesful, reset variables
             collided = false;
-            timeLeft = 3.0f;
+            timeLeft = 4.0f;
             timerText.text = timeLeft.ToString("0.00");
 
             //Turn off every possible screen
@@ -93,7 +93,7 @@ public class ExitCollision : MonoBehaviour {
         else
         {
             //If failed, reset
-            timeLeft = 3.0f;
+            timeLeft = 4.0f;
             collided = false;
         }
     }
@@ -117,7 +117,7 @@ public class ExitCollision : MonoBehaviour {
             //Debug.Log("Lost " + gameObject.transform.parent.name);
 
             //Reset variables
-            timeLeft = 3.0f;
+            timeLeft = 4.0f;
             collided = false;
 
             //Reset display

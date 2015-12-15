@@ -5,17 +5,16 @@ using System.Collections;
 public class MenuScript : MonoBehaviour {
 
     //Canvas menu Items
-    public Canvas quitMenu;
-	public Canvas creditMenu;
-    public Button startText;
-    public Button exitText;
+    public GameObject quitMenu;
+	public GameObject creditMenu;
+    public GameObject startMenu;
 
     //Input from the user
     public GameObject rightHand;
     public GameObject leftHand;
     
     //Time values and initialization
-    float timeLeft = 3.0f;
+    float timeLeft = 4.0f;
     bool collided = false;
     public GameObject timerScreen;
     public GameObject selectTimerScreen;
@@ -34,49 +33,35 @@ public class MenuScript : MonoBehaviour {
    
 	void Start () 
     {
-        quitMenu = quitMenu.GetComponent<Canvas>();
-        startText = startText.GetComponent<Button>();
-        exitText = exitText.GetComponent<Button>();
-        quitMenu.enabled = false;
-        creditMenu = creditMenu.GetComponent<Canvas>();
-        //creditMenu.enabled = false;
-
-        //Disables collisions for quit menu
-        //colBack.SetActive(false);
-        //colNo.SetActive(false);
-        //colYes.SetActive(false);
 
         timerText.text = timeLeft.ToString("0.00");
 	}
 
     public void ExitPress()
     {
-        Debug.Log("Made it here");
-
-        quitMenu.enabled = true;
-        startText.enabled = false;
-        exitText.enabled = false;
+        startMenu.SetActive(false);
 
         //Disables collisions for main menu
         colEnter.SetActive(false);
         colExit.SetActive(false);
         colCredits.SetActive(false);
 
+
         //Enables collisions for needed buttons
         colNo.SetActive(true);
         colYes.SetActive(true);
-        colBack.SetActive(true);
+        quitMenu.SetActive(true);
+        //colBack.SetActive(true);
 
 
     }
 
 	public void CreditPress()
 	{
-		quitMenu.enabled = false;
-		startText.enabled = false;
-		exitText.enabled = false;
+        quitMenu.SetActive(false);
+        startMenu.SetActive(false);
 
-		creditMenu.enabled = true;
+        creditMenu.SetActive(true);
 
         //Collisions
         colEnter.SetActive(false);
@@ -87,9 +72,8 @@ public class MenuScript : MonoBehaviour {
 	
     public void NoPress()
     {
-        quitMenu.enabled = false;
-        startText.enabled = true;
-        exitText.enabled = true;
+        quitMenu.SetActive(false);
+        startMenu.SetActive(true);
 
         //Enables collisions needed and disables others
         colBack.SetActive(false);
@@ -102,10 +86,9 @@ public class MenuScript : MonoBehaviour {
 
 	public void BackPress()
 	{
-		quitMenu.enabled = false;
-		startText.enabled = true;
-		exitText.enabled = true;
-		creditMenu.enabled = false;
+        quitMenu.SetActive(false);
+        startMenu.SetActive(true);
+        creditMenu.SetActive(false);
 
         //Disables and enables collisions
         colBack.SetActive(false);
@@ -136,31 +119,6 @@ public class MenuScript : MonoBehaviour {
             collided = true;
             Debug.Log("Collided " + gameObject.transform.name);
 
-            //Wrong place. Testing
-            //switch (gameObject.transform.name)
-            //{
-            //    case "ColEnter":
-            //        StartLevel();
-            //        break;
-            //    case "ColExit":
-            //        ExitPress();
-            //        break;
-            //    case "ColCredits":
-            //        CreditPress();
-            //        break;
-            //    case "colBack":
-            //        BackPress();
-            //        break;
-            //    case "ColNo":
-            //        NoPress();
-            //        break;
-            //    case "ColYes":
-            //        ExitGame();
-            //        break;
-            //    default:
-            //        break;
-            //}
-
         }
     
     }
@@ -170,7 +128,7 @@ public class MenuScript : MonoBehaviour {
         //If these exit, then we have to stop the countdown
         if (col.gameObject.name == "SphereLEFT" || col.gameObject.name == "SphereRIGHT")
         {
-            timeLeft = 3.0f;
+            timeLeft = 4.0f;
             collided = false;
 
             timerText.text = timeLeft.ToString("0.00");
@@ -220,14 +178,13 @@ public class MenuScript : MonoBehaviour {
             }
 
             collided = false;
-            timeLeft = 3.0f;
+            timeLeft = 4.0f;
             timerText.text = timeLeft.ToString("0.00");
-            //selectTimerScreen.SetActive(false);
 
         }
         else
         {
-            timeLeft = 3.0f;
+            timeLeft = 4.0f;
             collided = false;
         }
          

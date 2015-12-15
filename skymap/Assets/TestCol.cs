@@ -7,7 +7,7 @@ using System.Collections;
 public class TestCol : MonoBehaviour
 {
     //Starting values
-    float timeLeft = 3.0f;
+    float timeLeft = 4.0f;
     bool collided = false;
 
     //For displaying audio
@@ -59,7 +59,7 @@ public class TestCol : MonoBehaviour
             source.clip = shootSound;
             //source.Play();
             collided = false;
-            timeLeft = 3.0f;
+            timeLeft = 4.0f;
 
             //Reset display and turn it off
             timerText.text = timeLeft.ToString("0.00");
@@ -77,7 +77,7 @@ public class TestCol : MonoBehaviour
         } else
         {
             //If failed, reset
-            timeLeft = 3.0f;
+            timeLeft = 4.0f;
             collided = false;
         }
     }
@@ -102,7 +102,7 @@ public class TestCol : MonoBehaviour
             //Debug.Log("Lost " + gameObject.transform.parent.name);
 
             //Reset collided and make timeLeft 3.0f again
-            timeLeft = 3.0f;
+            timeLeft = 4.0f;
             collided = false;
 
             //Reset display
