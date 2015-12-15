@@ -38,19 +38,21 @@ public class MenuScript : MonoBehaviour {
         startText = startText.GetComponent<Button>();
         exitText = exitText.GetComponent<Button>();
         quitMenu.enabled = false;
-		creditMenu = creditMenu.GetComponent<Canvas>();
-		creditMenu.enabled = false;
+        creditMenu = creditMenu.GetComponent<Canvas>();
+        //creditMenu.enabled = false;
 
         //Disables collisions for quit menu
-        colBack.SetActive(false);
-        colNo.SetActive(false);
-        colYes.SetActive(false);
+        //colBack.SetActive(false);
+        //colNo.SetActive(false);
+        //colYes.SetActive(false);
 
         timerText.text = timeLeft.ToString("0.00");
 	}
 
     public void ExitPress()
     {
+        Debug.Log("Made it here");
+
         quitMenu.enabled = true;
         startText.enabled = false;
         exitText.enabled = false;
@@ -61,9 +63,9 @@ public class MenuScript : MonoBehaviour {
         colCredits.SetActive(false);
 
         //Enables collisions for needed buttons
-        colBack.SetActive(true);
         colNo.SetActive(true);
         colYes.SetActive(true);
+        colBack.SetActive(true);
 
 
     }
@@ -132,31 +134,32 @@ public class MenuScript : MonoBehaviour {
         if (col.gameObject.name == "SphereLEFT" || col.gameObject.name == "SphereRIGHT")
         {
             collided = true;
-            Debug.Log("Collided" + gameObject.transform.parent.name);
+            Debug.Log("Collided " + gameObject.transform.name);
 
-            switch (col.gameObject.name)
-            {
-                case "ColEnter":
-                    StartLevel();
-                    break;
-                case "ColExit":
-                    ExitPress();
-                    break;
-                case "ColCredits":
-                    CreditPress();
-                    break;
-                case "colBack":
-                    BackPress();
-                    break;
-                case "ColNo":
-                    NoPress();
-                    break;
-                case "ColYes":
-                    ExitGame();
-                    break;
-                default:
-                    break;
-            }
+            //Wrong place. Testing
+            //switch (gameObject.transform.name)
+            //{
+            //    case "ColEnter":
+            //        StartLevel();
+            //        break;
+            //    case "ColExit":
+            //        ExitPress();
+            //        break;
+            //    case "ColCredits":
+            //        CreditPress();
+            //        break;
+            //    case "colBack":
+            //        BackPress();
+            //        break;
+            //    case "ColNo":
+            //        NoPress();
+            //        break;
+            //    case "ColYes":
+            //        ExitGame();
+            //        break;
+            //    default:
+            //        break;
+            //}
 
         }
     
@@ -183,17 +186,43 @@ public class MenuScript : MonoBehaviour {
         {
             timeLeft -= Time.deltaTime;
 
+            Debug.Log(timeLeft);
+
             //Display in real time to the user
             timerText.text = timeLeft.ToString("0.00");
         }
 
         else if (timeLeft <= 0)
-        {   
-            
+        {
+
+            switch (gameObject.transform.name)
+            {
+                case "ColEnter":
+                    StartLevel();
+                    break;
+                case "ColExit":
+                    ExitPress();
+                    break;
+                case "ColCredits":
+                    CreditPress();
+                    break;
+                case "ColBack":
+                    BackPress();
+                    break;
+                case "ColNo":
+                    NoPress();
+                    break;
+                case "ColYes":
+                    ExitGame();
+                    break;
+                default:
+                    break;
+            }
+
             collided = false;
             timeLeft = 3.0f;
             timerText.text = timeLeft.ToString("0.00");
-            selectTimerScreen.SetActive(false);
+            //selectTimerScreen.SetActive(false);
 
         }
         else
