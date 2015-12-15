@@ -4,16 +4,33 @@ using System.Collections;
 
 public class MenuScript : MonoBehaviour {
 
+    //Canvas menu Items
     public Canvas quitMenu;
 	public Canvas creditMenu;
     public Button startText;
     public Button exitText;
-    public GameObject colYes;
+
+    //Input from the user
     public GameObject rightHand;
     public GameObject leftHand;
-    float timeLeft = 5.0f;
-   
-	// Use this for initialization
+    
+    //Time values and initialization
+    float timeLeft = 3.0f;
+    bool collided = false;
+    public GameObject timerScreen;
+    public GameObject selectTimerScreen;
+    public Text timerText;
+    
+    //Boxes for collisions
+    public GameObject colEnter;
+    public GameObject colExit;
+    public GameObject colCredits;
+    public GameObject colBack;
+    public GameObject colNo;
+    public GameObject colYes;
+
+
+
    
 	void Start () 
     {
@@ -21,11 +38,15 @@ public class MenuScript : MonoBehaviour {
         startText = startText.GetComponent<Button>();
         exitText = exitText.GetComponent<Button>();
         quitMenu.enabled = false;
-       // GameObject.Find("colYes").SetActive(false);
-
 		creditMenu = creditMenu.GetComponent<Canvas>();
 		creditMenu.enabled = false;
 
+        //Disables collisions for quit menu
+        colBack.SetActive(false);
+        colNo.SetActive(false);
+        colYes.SetActive(false);
+
+        timerText.text = timeLeft.ToString("0.00");
 	}
 
     public void ExitPress()
@@ -33,6 +54,18 @@ public class MenuScript : MonoBehaviour {
         quitMenu.enabled = true;
         startText.enabled = false;
         exitText.enabled = false;
+
+        //Disables collisions for main menu
+        colEnter.SetActive(false);
+        colExit.SetActive(false);
+        colCredits.SetActive(false);
+
+        //Enables collisions for needed buttons
+        colBack.SetActive(true);
+        colNo.SetActive(true);
+        colYes.SetActive(true);
+
+
     }
 
 	public void CreditPress()
@@ -42,7 +75,12 @@ public class MenuScript : MonoBehaviour {
 		exitText.enabled = false;
 
 		creditMenu.enabled = true;
-	
+
+        //Collisions
+        colEnter.SetActive(false);
+        colExit.SetActive(false);
+        colCredits.SetActive(false);
+        colBack.SetActive(true);
 	}
 	
     public void NoPress()
@@ -50,6 +88,14 @@ public class MenuScript : MonoBehaviour {
         quitMenu.enabled = false;
         startText.enabled = true;
         exitText.enabled = true;
+
+        //Enables collisions needed and disables others
+        colBack.SetActive(false);
+        colNo.SetActive(false);
+        colYes.SetActive(false);
+        colEnter.SetActive(true);
+        colExit.SetActive(true);
+        colCredits.SetActive(true);
 	}
 
 	public void BackPress()
@@ -58,6 +104,14 @@ public class MenuScript : MonoBehaviour {
 		startText.enabled = true;
 		exitText.enabled = true;
 		creditMenu.enabled = false;
+
+        //Disables and enables collisions
+        colBack.SetActive(false);
+        colNo.SetActive(false);
+        colYes.SetActive(false);
+        colEnter.SetActive(true);
+        colExit.SetActive(true);
+        colCredits.SetActive(true);
 	}
 
     public void StartLevel()
@@ -71,30 +125,82 @@ public class MenuScript : MonoBehaviour {
         Application.Quit();
     }
 
+   
     void OnCollisionEnter(Collision col)
-    {
-
-        if (col.gameObject.name == "enterObj")
+    { 
+        //If these calues collide with the object
+        if (col.gameObject.name == "SphereLEFT" || col.gameObject.name == "SphereRIGHT")
         {
-            Debug.Log("This worked");
-            StartLevel();
+            collided = true;
+            Debug.Log("Collided" + gameObject.transform.parent.name);
+
+            switch (col.gameObject.name)
+            {
+                case "ColEnter":
+                    StartLevel();
+                    break;
+                case "ColExit":
+                    ExitPress();
+                    break;
+                case "ColCredits":
+                    CreditPress();
+                    break;
+                case "colBack":
+                    BackPress();
+                    break;
+                case "ColNo":
+                    NoPress();
+                    break;
+                case "ColYes":
+                    ExitGame();
+                    break;
+                default:
+                    break;
+            }
+
+        }
+    
+    }
+
+    void OnCollisionExit(Collision col)
+    { 
+        //If these exit, then we have to stop the countdown
+        if (col.gameObject.name == "SphereLEFT" || col.gameObject.name == "SphereRIGHT")
+        {
+            timeLeft = 3.0f;
+            collided = false;
+
+            timerText.text = timeLeft.ToString("0.00");
         }
     }
 
-    public void KinectSelect()
-    {
-        if (rightHand.transform.position.x > .9f){
-            StartLevel();
-        }
-      
-       
-    }
-  
-
+    
 	// Update is called once per frame
 	void Update () 
     {
-       // KinectSelect();
+     //While user is colliding with the object, time is going down until they can select
+        if(timeLeft > 0 && collided == true)
+        {
+            timeLeft -= Time.deltaTime;
+
+            //Display in real time to the user
+            timerText.text = timeLeft.ToString("0.00");
+        }
+
+        else if (timeLeft <= 0)
+        {   
+            
+            collided = false;
+            timeLeft = 3.0f;
+            timerText.text = timeLeft.ToString("0.00");
+            selectTimerScreen.SetActive(false);
+
+        }
+        else
+        {
+            timeLeft = 3.0f;
+            collided = false;
+        }
          
     }
 }
