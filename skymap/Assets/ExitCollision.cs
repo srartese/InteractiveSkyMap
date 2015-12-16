@@ -31,6 +31,7 @@ public class ExitCollision : MonoBehaviour {
     public GameObject cameraObject;
     public GameObject kmCameraObject;
     public GameObject rotateObject;
+    public GameObject endGameCube;
 
     //Get scripts so we can re-activate them
     private CameraMovement cameraScript;
@@ -78,6 +79,8 @@ public class ExitCollision : MonoBehaviour {
             ariesScreen.SetActive(false);
             piscesScreen.SetActive(false);
             timerScreen.SetActive(false);
+
+            endGameCube.SetActive(true);
 
             //Turn on the other timer screen now
             selectTimerScreen.SetActive(true);

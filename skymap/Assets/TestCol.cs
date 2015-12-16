@@ -25,6 +25,7 @@ public class TestCol : MonoBehaviour
     public GameObject cameraObject;
     public GameObject kmCameraObject;
     public GameObject rotateObject;
+    public GameObject endGameCube;
 
     //Need these scripts so we can de-activate them
     private CameraMovement cameraScript;
@@ -57,7 +58,7 @@ public class TestCol : MonoBehaviour
             //Once successful, play a sound and reset variables
             Debug.Log("You found " + gameObject.transform.parent.name);
             source.clip = shootSound;
-            //source.Play();
+            source.Play();
             collided = false;
             timeLeft = 4.0f;
 
@@ -73,6 +74,7 @@ public class TestCol : MonoBehaviour
             //Turn on the elements to be used in the next screen
             infoScreen.SetActive(true);
             selectCube.SetActive(true);
+            endGameCube.SetActive(false);
             timerScreen.SetActive(true);
         } else
         {
@@ -85,7 +87,7 @@ public class TestCol : MonoBehaviour
     void OnCollisionEnter(Collision col)
     {
         //If these values collide with the object
-        if (col.gameObject.name == "SphereLEFT" || col.gameObject.name == "SphereRIGHT")
+        if (col.gameObject.name == "SphereLEFT" || col.gameObject.name == "NewSphereRIGHT")
         {
             //Debug.Log("Collided " + gameObject.transform.parent.name);
 
@@ -97,7 +99,7 @@ public class TestCol : MonoBehaviour
     void OnCollisionExit(Collision col)
     {
         //If these exit, then we have to stop the countdown
-        if (col.gameObject.name == "SphereLEFT" || col.gameObject.name == "SphereRIGHT")
+        if (col.gameObject.name == "SphereLEFT" || col.gameObject.name == "NewSphereRIGHT")
         {
             //Debug.Log("Lost " + gameObject.transform.parent.name);
 
