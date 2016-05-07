@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
 //This is named TestCol because I was originally using it as a test, but it unexpectedly succeeded!
@@ -31,7 +32,8 @@ public class TestCol : MonoBehaviour
     private CameraMovement cameraScript;
     private CameraMovement kmCameraScript;
     private Orbit orbitScript;
-
+    public Image loadingImage;            //Drag the circular image i.e Slider in our case
+    public float time;   
     void Start()
     {
         source = GetComponent<AudioSource>();
@@ -41,6 +43,7 @@ public class TestCol : MonoBehaviour
         infoScreen.SetActive(false);
         selectCube.SetActive(false);
         timerText.text = timeLeft.ToString("0.00");
+       // loadingImage.fillAmount = 0f;      // Initally progress bar is empty
     }
 
     void Update()
@@ -52,6 +55,8 @@ public class TestCol : MonoBehaviour
 
             //Display this in real time to the user
             timerText.text = timeLeft.ToString("0.00");
+            //loadingImage.fillAmount += Time.deltaTime / time;
+
         }
         else if (timeLeft <= 0)
         {
